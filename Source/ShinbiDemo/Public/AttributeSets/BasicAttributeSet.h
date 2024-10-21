@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
 #include "AbilitySystemComponent.h"
+#include "GameplayEffectExtension.h"
 #include "BasicAttributeSet.generated.h"
 
 /**
@@ -19,6 +20,8 @@
  	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
 // 使用格式:  ATTRIBUTE_ACCESSORS(UMyHealthSet, Health)
+
+struct FGameplayEffectModCallbackData;
 
 UCLASS()
 class SHINBIDEMO_API UBasicAttributeSet : public UAttributeSet
@@ -49,4 +52,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attribute Set")
 	FGameplayAttributeData MaxStrength;
 	ATTRIBUTE_ACCESSORS(UBasicAttributeSet, MaxStrength);
+
+	// 使用后处理函数进行夹值处理
+	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 };
