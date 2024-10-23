@@ -4,7 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "GameplayEffectTypes.h"
 #include "BaseCharacter.generated.h"
+
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHPChangeEvent, float, NewValue);
 
 UCLASS()
 class SHINBIDEMO_API ABaseCharacter : public ACharacter
@@ -25,4 +29,11 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	// 通过委托进行广播
+	UPROPERTY(BlueprintAssignable, Category = "Ability")
+	FOnHPChangeEvent HPChangeEvent;
+
+	// 角色生命值改变时调用
+	void OnHealthAttributeChanged(const FOnAttributeChangeData& Data);
 };
