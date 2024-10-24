@@ -16,7 +16,7 @@ class SHINBIDEMO_API ABaseCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
+	// Sets default values for this character's properties 
 	ABaseCharacter();
 
 protected:
