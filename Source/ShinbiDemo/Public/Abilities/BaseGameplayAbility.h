@@ -40,15 +40,9 @@ struct FGameplayAbilityInfoClass
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability")
 	TSubclassOf<UBaseGameplayAbility> AbilityClass;
 
-	FGameplayAbilityInfoClass() {}
+	FGameplayAbilityInfoClass();
 
-	FGameplayAbilityInfoClass(
-		float CD,
-		ECostType CostType,
-		float CostValue,
-		UMaterialInstance* IconMaterial,
-		TSubclassOf<UBaseGameplayAbility> Ability)
-		: CD(CD), CostType(CostType), CostValue(CostValue), IconMaterial(IconMaterial), AbilityClass(Ability) {} 
+	FGameplayAbilityInfoClass(float CD, ECostType CostType, float CostValue, UMaterialInstance* IconMaterial, TSubclassOf<UBaseGameplayAbility> Ability);
 
 };
 

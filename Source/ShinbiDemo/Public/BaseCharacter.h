@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "GameplayEffectTypes.h"
+#include "Abilities/BaseGameplayAbility.h"
 #include "BaseCharacter.generated.h"
 
 
@@ -36,4 +37,7 @@ public:
 
 	// 角色生命值改变时调用
 	void OnHealthAttributeChanged(const FOnAttributeChangeData& Data);
+
+	UFUNCTION(BlueprintCallable, Category = "BaseCharacter")
+	FGameplayAbilityInfoClass GetGameplayAbilityInfo(TSubclassOf<UBaseGameplayAbility> AbilityClass, int level);
 };

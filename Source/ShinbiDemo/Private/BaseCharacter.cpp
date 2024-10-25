@@ -45,3 +45,16 @@ void ABaseCharacter::OnHealthAttributeChanged(const FOnAttributeChangeData& Data
 	HPChangeEvent.Broadcast(Data.NewValue);
 }
 
+FGameplayAbilityInfoClass ABaseCharacter::GetGameplayAbilityInfo(TSubclassOf<UBaseGameplayAbility> AbilityClass, int level)
+{
+	UAbilitySystemComponent* MyASC = this->FindComponentByClass<UAbilitySystemComponent>();
+	UBaseGameplayAbility* AbilityInstance = AbilityClass->GetDefaultObject<UBaseGameplayAbility>();
+
+	if (MyASC && AbilityInstance)
+	{
+		return AbilityInstance->GetAbilityInfo(level);
+	}
+
+	return FGameplayAbilityInfoClass();
+}
+
