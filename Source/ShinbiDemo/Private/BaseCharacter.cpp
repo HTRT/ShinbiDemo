@@ -22,6 +22,8 @@ void ABaseCharacter::BeginPlay()
 	{
 		// 通过ASC获取改变数值的属性，并绑定委托函数
 		MyASC->GetGameplayAttributeValueChangeDelegate(UBasicAttributeSet::GetHPAttribute()).AddUObject(this, &ABaseCharacter::OnHealthAttributeChanged);
+		MyASC->GetGameplayAttributeValueChangeDelegate(UBasicAttributeSet::GetMPAttribute()).AddUObject(this, &ABaseCharacter::OnManaAttributeChanged);
+		MyASC->GetGameplayAttributeValueChangeDelegate(UBasicAttributeSet::GetStrengthAttribute()).AddUObject(this, &ABaseCharacter::OnStrengthAttributeChanged);
 	}
 }
 
@@ -43,6 +45,16 @@ void ABaseCharacter::OnHealthAttributeChanged(const FOnAttributeChangeData& Data
 {
 	// 将属性值改变的情况进行广播处理
 	HPChangeEvent.Broadcast(Data.NewValue);
+}
+
+void ABaseCharacter::OnManaAttributeChanged(const FOnAttributeChangeData& Data)
+{
+	MPChangeEvent.Broadcast(Data.NewValue);
+}
+
+void ABaseCharacter::OnStrengthAttributeChanged(const FOnAttributeChangeData& Data)
+{
+	StrengthChangeEvent.Broadcast(Data.NewValue);
 }
 
 FGameplayAbilityInfoClass ABaseCharacter::GetGameplayAbilityInfo(TSubclassOf<UBaseGameplayAbility> AbilityClass, int level)
